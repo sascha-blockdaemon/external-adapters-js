@@ -4439,7 +4439,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/node", "npm:16.11.45"],\
             ["decimal.js", "npm:10.3.1"],\
             ["ethers", "npm:5.0.32"],\
-            ["moment", "npm:2.29.3"],\
+            ["moment", "npm:2.29.4"],\
             ["nock", "npm:13.2.9"],\
             ["tslib", "npm:2.4.0"],\
             ["typescript", "patch:typescript@npm%3A4.7.4#~builtin<compat/typescript>::version=4.7.4&hash=7ad353"]\
@@ -5448,7 +5448,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/node", "npm:16.11.45"],\
             ["@types/supertest", "npm:2.0.12"],\
             ["ethers", "npm:5.6.8"],\
-            ["moment", "npm:2.29.3"],\
+            ["moment", "npm:2.29.4"],\
             ["nock", "npm:13.2.9"],\
             ["supertest", "npm:6.2.4"],\
             ["tslib", "npm:2.4.0"],\
@@ -5842,7 +5842,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["axios", "npm:0.24.0"],\
             ["csv-parse", "npm:4.16.3"],\
             ["decimal.js", "npm:10.3.1"],\
-            ["moment", "npm:2.29.3"],\
+            ["moment", "npm:2.29.4"],\
             ["moment-timezone", "npm:0.5.34"],\
             ["nock", "npm:13.2.9"],\
             ["supertest", "npm:6.2.4"],\
@@ -25677,6 +25677,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/moment-npm-2.29.3-fe4ba99bae-2e780e36d9.zip/node_modules/moment/",\
           "packageDependencies": [\
             ["moment", "npm:2.29.3"]\
+          ],\
+          "linkType": "HARD"\
+        }],\
+        ["npm:2.29.4", {\
+          "packageLocation": "./.yarn/cache/moment-npm-2.29.4-902943305d-0ec3f9c2bc.zip/node_modules/moment/",\
+          "packageDependencies": [\
+            ["moment", "npm:2.29.4"]\
           ],\
           "linkType": "HARD"\
         }]\
