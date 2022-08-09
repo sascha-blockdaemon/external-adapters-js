@@ -149,3 +149,62 @@ export const mockResponseSuccessLatestBtcEndpoint = () =>
         'h3=":443"; ma=86400, h3-29=":443"; ma=86400, h3-28=":443"; ma=86400, h3-27=":443"; ma=86400',
       ],
     )
+
+export const mockResponseSuccessLatestUsdInverseEndpoint = () =>
+  nock('https://metals-api.com:443', { encodedQueryParams: true })
+    .get('/api/latest')
+    .query({ access_key: 'fake-api-key', from: 'USD', to: 'GBP,XAU' })
+    .reply(
+      200,
+      {
+        success: true,
+        timestamp: 1641990180,
+        date: '2022-01-12',
+        base: 'USD',
+        rates: {
+          XAU: 0.04228229144046888,
+          GBP: 42968.36778447169,
+        },
+        unit: 'per ounce',
+      },
+      [
+        'Date',
+        'Wed, 12 Jan 2022 12:24:06 GMT',
+        'Content-Type',
+        'application/json',
+        'Transfer-Encoding',
+        'chunked',
+        'Connection',
+        'close',
+        'access-control-allow-origin',
+        '*',
+        'access-control-allow-methods',
+        '*',
+        'access-control-allow-headers',
+        '*',
+        'cache-control',
+        'no-cache, private',
+        'x-ratelimit-limit',
+        '60',
+        'x-ratelimit-remaining',
+        '54',
+        'etag',
+        '"2130497edf814c1554fedfd7108f7549"',
+        'via',
+        '1.1 vegur',
+        'CF-Cache-Status',
+        'DYNAMIC',
+        'Expect-CT',
+        'max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"',
+        'Report-To',
+        '{"endpoints":[{"url":"https:\\/\\/a.nel.cloudflare.com\\/report\\/v3?s=VHWFuPNP7p6gN1%2BCwCbvH%2F45Mj44E18oevnBErKkc5gMVPavXr%2BKqiPhFAuMVBpFokuNXKbD5uEuEA7DJGjJpS%2BN6YoYkIu64Jc0N%2F78evcIC5V0gmY6esMA64cu4zaxew%3D%3D"}],"group":"cf-nel","max_age":604800}',
+        'NEL',
+        '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}',
+        'Server',
+        'cloudflare',
+        'CF-RAY',
+        '6cc65c205c2a7aa2-LAX',
+        'alt-svc',
+        'h3=":443"; ma=86400, h3-29=":443"; ma=86400, h3-28=":443"; ma=86400, h3-27=":443"; ma=86400',
+      ],
+    )

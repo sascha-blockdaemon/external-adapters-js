@@ -105,15 +105,28 @@ Object {
 }
 `;
 
-exports[`execute latest api should error with batched base symbols 1`] = `
+exports[`execute latest api should succeed with batched base symbols (inverted quote) 1`] = `
 Object {
   "error": Object {
-    "feedID": "[BTC|XAU]/USD",
-    "message": "base parameter must be of type string",
+    "feedID": "[GBP|XAU]/USD",
+    "message": "Nock: No match for request {
+  \\"method\\": \\"GET\\",
+  \\"url\\": \\"https://metals-api.com/api/latest?access_key=fake-api-key&base=USD&symbols=XAU,GBP\\",
+  \\"headers\\": {
+    \\"accept\\": \\"application/json\\",
+    \\"cache-control\\": \\"no-cache, no-store, must-revalidate\\",
+    \\"pragma\\": \\"no-cache\\",
+    \\"content-type\\": \\"application/json\\",
+    \\"x-api-key\\": \\"fake-api-key\\",
+    \\"user-agent\\": \\"axios/0.24.0\\"
+  }
+}",
     "name": "AdapterError",
+    "url": "https:/metals-api.com/api/latest",
   },
   "jobRunID": "1",
+  "providerStatusCode": 0,
   "status": "errored",
-  "statusCode": 400,
+  "statusCode": 200,
 }
 `;

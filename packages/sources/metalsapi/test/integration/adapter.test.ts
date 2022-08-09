@@ -5,6 +5,7 @@ import {
   mockResponseSuccessConvertEndpoint,
   mockResponseSuccessLatestEndpoint,
   mockResponseSuccessLatestBtcEndpoint,
+  mockResponseSuccessLatestUsdInverseEndpoint,
 } from './fixtures'
 import { setupExternalAdapterTest } from '@chainlink/ea-test-helpers'
 import type { SuiteContext } from '@chainlink/ea-test-helpers'
@@ -89,16 +90,16 @@ describe('execute', () => {
       expect(response.body).toMatchSnapshot()
     })
 
-    it('should error with batched base symbols', async () => {
+    it('should succeed with batched base symbols (inverted quote)', async () => {
       const data: AdapterRequest = {
         id,
         data: {
           endpoint: 'latest',
-          base: ['XAU', 'BTC'],
+          base: ['XAU', 'GBP'],
           quote: 'USD',
         },
       }
-      mockResponseSuccessLatestEndpoint()
+      mockResponseSuccessLatestUsdInverseEndpoint()
 
       const response = await (context.req as SuperTest<Test>)
         .post('/')
@@ -106,7 +107,8 @@ describe('execute', () => {
         .set('Accept', '*/*')
         .set('Content-Type', 'application/json')
         .expect('Content-Type', /json/)
-        .expect(400)
+        .expect(200)
+      console.log(response.body)
       expect(response.body).toMatchSnapshot()
     })
   })
