@@ -1,4 +1,4 @@
-import { Requester, Validator } from '@chainlink/ea-bootstrap'
+import { Logger, Requester, Validator } from '@chainlink/ea-bootstrap'
 import type { ExecuteWithConfig, Config, InputParameters } from '@chainlink/ea-bootstrap'
 import { NAME as AdapterName } from '../config'
 
@@ -39,9 +39,11 @@ export interface ResponseSchema {
 export const execute: ExecuteWithConfig<Config> = async (request, _, config) => {
   const validator = new Validator(request, inputParameters)
 
+  Logger.info(validator.validated.data)
+  console.log('TESSSSSST')
   const jobRunID = validator.validated.id
-  const from = validator.overrideSymbol(AdapterName, validator.validated.data.base).toUpperCase()
-  const to = validator.validated.data.quote.toUpperCase()
+  const from = validator.overrideSymbol(AdapterName, validator.validated.data.base)
+  const to = validator.validated.data.quote
   const amount = validator.validated.data.amount
   const url = `convert`
 

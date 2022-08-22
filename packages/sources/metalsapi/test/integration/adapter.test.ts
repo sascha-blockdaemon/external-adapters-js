@@ -57,6 +57,7 @@ describe('execute', () => {
           quote: 'USD',
         },
       }
+
       mockResponseSuccessLatestEndpoint()
 
       const response = await (context.req as SuperTest<Test>)
@@ -78,6 +79,7 @@ describe('execute', () => {
           quote: ['USD', 'XAU'],
         },
       }
+
       mockResponseSuccessLatestBtcEndpoint()
 
       const response = await (context.req as SuperTest<Test>)
@@ -95,10 +97,11 @@ describe('execute', () => {
         id,
         data: {
           endpoint: 'latest',
-          base: ['XAU', 'GBP'],
+          base: ['XAU', 'GBP'], //Batching happens in order, so expect "XAU,GBP" to appear in the query (not "GBP,XAU")
           quote: 'USD',
         },
       }
+      //The EA should inverse the base and quote. I.e, the above would result in a  {base: USD, quote: [XAU, GBP]
       mockResponseSuccessLatestUsdInverseEndpoint()
 
       const response = await (context.req as SuperTest<Test>)

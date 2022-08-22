@@ -1,4 +1,4 @@
-import { Requester, Validator, CacheKey } from '@chainlink/ea-bootstrap'
+import { Requester, Validator, CacheKey, Logger } from '@chainlink/ea-bootstrap'
 import type {
   ExecuteWithConfig,
   Config,
@@ -102,7 +102,7 @@ export const execute: ExecuteWithConfig<Config> = async (request, _, config) => 
   console.log(from)
   console.log(to)
   if (Array.isArray(from) && from.length > 1 && Array.isArray(to) && to.length > 1) {
-    console.log('WARNING')
+    Logger.warn('Processing request where')
   }
 
   //The api only accepts a list in its "symbols" (quote) field.

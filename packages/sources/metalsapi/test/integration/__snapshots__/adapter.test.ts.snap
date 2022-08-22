@@ -107,26 +107,81 @@ Object {
 
 exports[`execute latest api should succeed with batched base symbols (inverted quote) 1`] = `
 Object {
-  "error": Object {
-    "feedID": "[GBP|XAU]/USD",
-    "message": "Nock: No match for request {
-  \\"method\\": \\"GET\\",
-  \\"url\\": \\"https://metals-api.com/api/latest?access_key=fake-api-key&base=USD&symbols=XAU,GBP\\",
-  \\"headers\\": {
-    \\"accept\\": \\"application/json\\",
-    \\"cache-control\\": \\"no-cache, no-store, must-revalidate\\",
-    \\"pragma\\": \\"no-cache\\",
-    \\"content-type\\": \\"application/json\\",
-    \\"x-api-key\\": \\"fake-api-key\\",
-    \\"user-agent\\": \\"axios/0.24.0\\"
-  }
-}",
-    "name": "AdapterError",
-    "url": "https:/metals-api.com/api/latest",
+  "data": Object {
+    "base": "USD",
+    "date": "2022-01-12",
+    "rates": Object {
+      "GBP": 42968.36778447169,
+      "XAU": 0.04228229144046888,
+    },
+    "results": Array [
+      Array [
+        "4LsxrIT483BCS93HKnZ32ylFSOU=",
+        Object {
+          "data": Object {
+            "base": "XAU",
+            "endpoint": "latest",
+            "quote": "USD",
+          },
+          "debug": Object {
+            "batchCacheKey": "aQyZBD4Svg72cpXfGQUCGpzUNQI=",
+            "batchChildrenCacheKeys": Array [
+              Array [
+                "4LsxrIT483BCS93HKnZ32ylFSOU=",
+                Object {
+                  "data": Object {
+                    "base": "XAU",
+                    "endpoint": "latest",
+                    "quote": "USD",
+                  },
+                  "id": "1",
+                },
+              ],
+            ],
+            "cacheKey": "WsOvkm0wEBg6k+OFH4f0i465GGQ=",
+          },
+          "id": "1",
+          "rateLimitMaxAge": 235294117,
+        },
+        23.65056305919334,
+      ],
+      Array [
+        "s4Eob4V/uG3W8FVSucnYEe/iTP4=",
+        Object {
+          "data": Object {
+            "base": "GBP",
+            "endpoint": "latest",
+            "quote": "USD",
+          },
+          "debug": Object {
+            "batchCacheKey": "aQyZBD4Svg72cpXfGQUCGpzUNQI=",
+            "batchChildrenCacheKeys": Array [
+              Array [
+                "4LsxrIT483BCS93HKnZ32ylFSOU=",
+                Object {
+                  "data": Object {
+                    "base": "XAU",
+                    "endpoint": "latest",
+                    "quote": "USD",
+                  },
+                  "id": "1",
+                },
+              ],
+            ],
+            "cacheKey": "WsOvkm0wEBg6k+OFH4f0i465GGQ=",
+          },
+          "id": "1",
+          "rateLimitMaxAge": 235294117,
+        },
+        0.00002327293429008,
+      ],
+    ],
+    "success": true,
+    "timestamp": 1641990180,
+    "unit": "per ounce",
   },
   "jobRunID": "1",
-  "providerStatusCode": 0,
-  "status": "errored",
+  "providerStatusCode": 200,
   "statusCode": 200,
 }
 `;
