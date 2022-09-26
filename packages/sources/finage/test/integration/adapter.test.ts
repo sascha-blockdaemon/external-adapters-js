@@ -40,6 +40,7 @@ describe('execute', () => {
 
   const envVariables = {
     API_KEY: process.env.API_KEY || 'fake-api-key',
+    WS_SOCKET_KEY: process.env.WS_SOCKET_KEY || 'test_socket_key',
   }
 
   setupExternalAdapterTest(envVariables, context)
@@ -149,6 +150,54 @@ describe('execute', () => {
 
     it('should return success', async () => {
       mockResponseSuccess()
+
+      const response = await (context.req as SuperTest<Test>)
+        .post('/')
+        .send(data)
+        .set('Accept', '*/*')
+        .set('Content-Type', 'application/json')
+        .expect('Content-Type', /json/)
+        .expect(200)
+      expect(response.body).toMatchSnapshot()
+    })
+  })
+
+  describe('commodities api', () => {
+    const data: AdapterRequest = {
+      id,
+      data: {
+        endpoint: 'commodities',
+        from: 'WTI',
+        to: 'USD',
+      },
+    }
+
+    it('should return success', async () => {
+      mockResponseSuccess()
+
+      const response = await (context.req as SuperTest<Test>)
+        .post('/')
+        .send(data)
+        .set('Accept', '*/*')
+        .set('Content-Type', 'application/json')
+        .expect('Content-Type', /json/)
+        .expect(200)
+      expect(response.body).toMatchSnapshot()
+    })
+  })
+
+  describe('commodities api with invalid base', () => {
+    const data: AdapterRequest = {
+      id,
+      data: {
+        endpoint: 'commodities',
+        from: 'nonexisting',
+        to: 'USD',
+      },
+    }
+
+    it('should return failure', async () => {
+      mockResponseFailure()
 
       const response = await (context.req as SuperTest<Test>)
         .post('/')

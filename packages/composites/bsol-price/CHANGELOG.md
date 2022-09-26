@@ -1,5 +1,100 @@
 # @chainlink/bsol-price-adapter
 
+## 2.2.20
+
+### Patch Changes
+
+- Updated dependencies [5e7393deb]
+- Updated dependencies [63d34422f]
+- Updated dependencies [5e7393deb]
+  - @chainlink/ea-bootstrap@2.19.3
+  - @chainlink/token-allocation-adapter@1.7.0
+  - @chainlink/ea-test-helpers@1.4.1
+  - @chainlink/solana-view-function-adapter@2.2.17
+
+## 2.2.19
+
+### Patch Changes
+
+- Updated dependencies [3a0e5aaa9]
+  - @chainlink/ea-bootstrap@2.19.2
+  - @chainlink/ea-test-helpers@1.4.1
+  - @chainlink/token-allocation-adapter@1.6.4
+  - @chainlink/solana-view-function-adapter@2.2.16
+
+## 2.2.18
+
+### Patch Changes
+
+- @chainlink/token-allocation-adapter@1.6.3
+
+## 2.2.17
+
+### Patch Changes
+
+- Updated dependencies [05a3f9464]
+  - @chainlink/ea-bootstrap@2.19.1
+  - @chainlink/ea-test-helpers@1.4.1
+  - @chainlink/token-allocation-adapter@1.6.2
+  - @chainlink/solana-view-function-adapter@2.2.15
+
+## 2.2.16
+
+### Patch Changes
+
+- Updated dependencies [5a1adab07]
+- Updated dependencies [ed54a688b]
+- Updated dependencies [530753225]
+- Updated dependencies [88fdcb137]
+  - @chainlink/ea-bootstrap@2.19.0
+  - @chainlink/ea-test-helpers@1.4.1
+  - @chainlink/token-allocation-adapter@1.6.1
+  - @chainlink/solana-view-function-adapter@2.2.14
+
+## 2.2.15
+
+### Patch Changes
+
+- Updated dependencies [cf37d46fc]
+- Updated dependencies [3b7c79459]
+- Updated dependencies [cf37d46fc]
+  - @chainlink/token-allocation-adapter@1.6.0
+  - @chainlink/ea-bootstrap@2.18.2
+  - @chainlink/ea-test-helpers@1.4.1
+  - @chainlink/solana-view-function-adapter@2.2.13
+
+## 2.2.14
+
+### Patch Changes
+
+- Updated dependencies [c14139f55]
+  - @chainlink/ea-bootstrap@2.18.1
+  - @chainlink/token-allocation-adapter@1.5.14
+  - @chainlink/ea-test-helpers@1.4.1
+  - @chainlink/solana-view-function-adapter@2.2.12
+
+## 2.2.13
+
+### Patch Changes
+
+- @chainlink/token-allocation-adapter@1.5.13
+
+## 2.2.12
+
+### Patch Changes
+
+- Updated dependencies [48730a71c]
+  - @chainlink/ea-bootstrap@2.18.0
+  - @chainlink/token-allocation-adapter@1.5.12
+  - @chainlink/ea-test-helpers@1.4.1
+  - @chainlink/solana-view-function-adapter@2.2.11
+
+## 2.2.11
+
+### Patch Changes
+
+- @chainlink/token-allocation-adapter@1.5.11
+
 ## 2.2.10
 
 ### Patch Changes

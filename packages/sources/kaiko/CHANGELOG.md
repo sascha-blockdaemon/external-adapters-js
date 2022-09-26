@@ -1,5 +1,78 @@
 # @chainlink/kaiko-adapter
 
+## 1.5.11
+
+### Patch Changes
+
+- 5e7393deb: Add API_TIMEOUT to env default overrides, with an override of 30s for Kaiko
+- Updated dependencies [5e7393deb]
+- Updated dependencies [5e7393deb]
+  - @chainlink/ea-bootstrap@2.19.3
+  - @chainlink/ea-test-helpers@1.4.1
+
+## 1.5.10
+
+### Patch Changes
+
+- Updated dependencies [3a0e5aaa9]
+  - @chainlink/ea-bootstrap@2.19.2
+  - @chainlink/ea-test-helpers@1.4.1
+
+## 1.5.9
+
+### Patch Changes
+
+- 7f7e620ac: Remove symbol mapping for UNI
+
+## 1.5.8
+
+### Patch Changes
+
+- Updated dependencies [05a3f9464]
+  - @chainlink/ea-bootstrap@2.19.1
+  - @chainlink/ea-test-helpers@1.4.1
+
+## 1.5.7
+
+### Patch Changes
+
+- Updated dependencies [5a1adab07]
+- Updated dependencies [ed54a688b]
+- Updated dependencies [530753225]
+- Updated dependencies [88fdcb137]
+  - @chainlink/ea-bootstrap@2.19.0
+  - @chainlink/ea-test-helpers@1.4.1
+
+## 1.5.6
+
+### Patch Changes
+
+- Updated dependencies [3b7c79459]
+  - @chainlink/ea-bootstrap@2.18.2
+  - @chainlink/ea-test-helpers@1.4.1
+
+## 1.5.5
+
+### Patch Changes
+
+- Updated dependencies [c14139f55]
+  - @chainlink/ea-bootstrap@2.18.1
+  - @chainlink/ea-test-helpers@1.4.1
+
+## 1.5.4
+
+### Patch Changes
+
+- Updated dependencies [48730a71c]
+  - @chainlink/ea-bootstrap@2.18.0
+  - @chainlink/ea-test-helpers@1.4.1
+
+## 1.5.3
+
+### Patch Changes
+
+- 04ea6e448: Updated with better approach to ignore unused var linting and to avoid type coercion
+
 ## 1.5.2
 
 ### Patch Changes

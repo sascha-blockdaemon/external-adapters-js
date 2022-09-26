@@ -8,12 +8,16 @@ describe('execute', () => {
   const jobID = '1'
   const execute = makeExecute()
   process.env.API_KEY = process.env.API_KEY ?? 'test_api_key'
+  process.env.WS_SOCKET_KEY = process.env.WS_SOCKET_KEY ?? 'test_socket_key'
 
   describe('validation error', () => {
     const requests = [
       { name: 'empty data', testData: { data: { endpoint: 'forex' } } },
       { name: 'missing quote', testData: { data: { endpoint: 'forex', base: 'GBP' } } },
       { name: 'missing base', testData: { data: { endpoint: 'forex', quote: 'USD' } } },
+      { name: 'empty data', testData: { data: { endpoint: 'commodities' } } },
+      { name: 'missing quote', testData: { data: { endpoint: 'commodities', base: 'WTI' } } },
+      { name: 'missing base', testData: { data: { endpoint: 'commodities', quote: 'USD' } } },
     ]
 
     requests.forEach((req) => {

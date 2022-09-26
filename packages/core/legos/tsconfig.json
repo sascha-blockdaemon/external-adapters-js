@@ -41,6 +41,9 @@
       "path": "../../sources/armanino"
     },
     {
+      "path": "../../sources/bank-frick"
+    },
+    {
       "path": "../../sources/bea"
     },
     {
@@ -161,6 +164,9 @@
       "path": "../../sources/dxfeed-secondary"
     },
     {
+      "path": "../../sources/elwood"
+    },
+    {
       "path": "../../sources/ens"
     },
     {
@@ -171,6 +177,9 @@
     },
     {
       "path": "../../sources/eth-balance"
+    },
+    {
+      "path": "../../sources/eth-beacon"
     },
     {
       "path": "../../sources/etherchain"
@@ -207,6 +216,9 @@
     },
     {
       "path": "../../sources/galaxis"
+    },
+    {
+      "path": "../../sources/galaxy"
     },
     {
       "path": "../../sources/gemini"
@@ -317,7 +329,7 @@
       "path": "../../sources/por-address-list"
     },
     {
-      "path": "../../sources/reduce"
+      "path": "../../non-deployable/reduce"
     },
     {
       "path": "../../sources/renvm-address-set"
@@ -345,6 +357,9 @@
     },
     {
       "path": "../../sources/stasis"
+    },
+    {
+      "path": "../../sources/swell-address-list"
     },
     {
       "path": "../../sources/synthetix-debt-pool"

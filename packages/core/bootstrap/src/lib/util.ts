@@ -29,8 +29,9 @@ export const baseEnvDefaults: EnvDefaults = {
   EA_PORT: '8080',
   EA_HOST: '::',
   METRICS_PORT: '9080',
+  METRICS_ENABLED: 'true',
   RETRY: '1',
-  API_TIMEOUT: '30000',
+  API_TIMEOUT: '10000',
   CACHE_ENABLED: 'true',
   CACHE_TYPE: 'local',
   CACHE_MAX_AGE: '90000', // 1.5 minutes
@@ -39,10 +40,10 @@ export const baseEnvDefaults: EnvDefaults = {
   CACHE_UPDATE_AGE_ON_GET: 'false',
   CACHE_REDIS_CONNECTION_TIMEOUT: '15000', // Timeout per long lived connection (ms)
   CACHE_REDIS_HOST: '127.0.0.1', // IP address of the Redis server
-  CACHE_REDIS_MAX_QUEUED_ITEMS: '500', // Maximum length of the client's internal command queue
+  CACHE_REDIS_MAX_QUEUED_ITEMS: '3000', // Maximum length of the client's internal command queue
   CACHE_REDIS_MAX_RECONNECT_COOLDOWN: '3000', // Max cooldown time before attempting to reconnect (ms)
   CACHE_REDIS_PORT: '6379', // Port of the Redis server
-  CACHE_REDIS_TIMEOUT: '500', // Timeout per request (ms)
+  CACHE_REDIS_TIMEOUT: '1000', // Timeout per request (ms)
   RATE_LIMIT_ENABLED: 'true',
   WARMUP_ENABLED: 'true',
   WARMUP_UNHEALTHY_THRESHOLD: '3',
@@ -580,6 +581,57 @@ export const mapRPCErrorMessage = (errorCode: string, errorMessage: string): str
   return errorMessage
 }
 
+// Utilizes the getPairOptionsMap method to build the TOptions map for an adapter
+// This method is used for non-batched requests which would only return a single TOptions
+// Non-batched requests will only have a single base and single quote
+export const getPairOptions = <TOptions, TInputParameters extends BasePairInputParameters>(
+  adapterName: string,
+  validator: Validator<TInputParameters>,
+  getIncludesOptions: (
+    validator: Validator<TInputParameters>,
+    include: IncludePair,
+  ) => TOptions | undefined,
+  defaultGetOptions: (base: string, quote: string) => TOptions,
+  customOverrideIncludes?: (base: string, quote: string, includes: string[]) => IncludePair,
+): TOptions => {
+  const validatedBase = validator.validated.data.base as string
+  const validatedQuote = validator.validated.data.quote as string
+  const includesOptionsMap = getPairOptionsMap<TOptions, TInputParameters>(
+    adapterName,
+    validator,
+    getIncludesOptions,
+    defaultGetOptions,
+    customOverrideIncludes,
+  )
+  return includesOptionsMap[validatedBase][validatedQuote]
+}
+
+// Utilizes the getPairOptionsMap method to build the TOptions map for an adapter
+// This method is used for batch requests which could return just a single TOptions or a PairOptionsMap (if multiple bases or quotes are passed)
+export const getBatchedPairOptions = <TOptions, TInputParameters extends BasePairInputParameters>(
+  adapterName: string,
+  validator: Validator<TInputParameters>,
+  getIncludesOptions: (
+    validator: Validator<TInputParameters>,
+    include: IncludePair,
+  ) => TOptions | undefined,
+  defaultGetOptions: (base: string, quote: string) => TOptions,
+  customOverrideIncludes?: (base: string, quote: string, includes: string[]) => IncludePair,
+): TOptions | PairOptionsMap<TOptions> => {
+  const validatedBase = validator.validated.data.base
+  const validatedQuote = validator.validated.data.quote
+  const includesOptionsMap = getPairOptionsMap<TOptions, TInputParameters>(
+    adapterName,
+    validator,
+    getIncludesOptions,
+    defaultGetOptions,
+    customOverrideIncludes,
+  )
+  return Array.isArray(validatedBase) || Array.isArray(validatedQuote)
+    ? includesOptionsMap
+    : includesOptionsMap[validatedBase][validatedQuote]
+}
+
 /**
  * Get request options for base/quote inputs for adapters with `includes.json`. The `includes.json` contains an array
  * of base/quote pairs with related replacement inputs to be used in their place (usually for the purpose of fetching prices through
@@ -591,7 +643,7 @@ export const mapRPCErrorMessage = (errorCode: string, errorMessage: string): str
  * @param customOverrideIncludes Method to replace inputs for request if `includes` from request is of type (string[]) but the base/quote are not in the preset `includes` passed to the validator
  * @returns object of request options to use for given base/quote pair from validator
  */
-export const getPairOptions = <TOptions, TInputParameters extends BasePairInputParameters>(
+export const getPairOptionsMap = <TOptions, TInputParameters extends BasePairInputParameters>(
   adapterName: string,
   validator: Validator<TInputParameters>,
   getIncludesOptions: (
@@ -600,7 +652,7 @@ export const getPairOptions = <TOptions, TInputParameters extends BasePairInputP
   ) => TOptions | undefined,
   defaultGetOptions: (base: string, quote: string) => TOptions,
   customOverrideIncludes?: (base: string, quote: string, includes: string[]) => IncludePair,
-): TOptions | PairOptionsMap<TOptions> => {
+): PairOptionsMap<TOptions> => {
   const validatedBase = validator.validated.data.base
   const validatedQuote = validator.validated.data.quote
   const includes = validator.validated.includes || []
@@ -636,7 +688,5 @@ export const getPairOptions = <TOptions, TInputParameters extends BasePairInputP
     }
   }
 
-  return Array.isArray(validatedBase) || Array.isArray(validatedQuote)
-    ? includesOptionsMap
-    : includesOptionsMap[validatedBase][validatedQuote]
+  return includesOptionsMap
 }

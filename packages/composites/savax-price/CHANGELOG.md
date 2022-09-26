@@ -1,5 +1,103 @@
 # @chainlink/savax-price-adapter
 
+## 3.0.2
+
+### Patch Changes
+
+- Updated dependencies [5e7393deb]
+- Updated dependencies [63d34422f]
+- Updated dependencies [5e7393deb]
+  - @chainlink/ea-bootstrap@2.19.3
+  - @chainlink/token-allocation-adapter@1.7.0
+  - @chainlink/ea-test-helpers@1.4.1
+
+## 3.0.1
+
+### Patch Changes
+
+- b7805be51: Set correct default chain ID
+
+## 3.0.0
+
+### Major Changes
+
+- bbcf0eea4: Added CHAIN_ID environment variable and validation for connecting to blockchain endpoints. **WARNING:** Before upgrading, ensure the default CHAIN_ID value is correct for the chain(s) you use. If not, you need to explicitly set this env var. Please refer to the individual adapter README for more information.
+
+### Patch Changes
+
+- Updated dependencies [3a0e5aaa9]
+  - @chainlink/ea-bootstrap@2.19.2
+  - @chainlink/ea-test-helpers@1.4.1
+  - @chainlink/token-allocation-adapter@1.6.4
+
+## 2.0.45
+
+### Patch Changes
+
+- @chainlink/token-allocation-adapter@1.6.3
+
+## 2.0.44
+
+### Patch Changes
+
+- Updated dependencies [05a3f9464]
+  - @chainlink/ea-bootstrap@2.19.1
+  - @chainlink/ea-test-helpers@1.4.1
+  - @chainlink/token-allocation-adapter@1.6.2
+
+## 2.0.43
+
+### Patch Changes
+
+- Updated dependencies [5a1adab07]
+- Updated dependencies [ed54a688b]
+- Updated dependencies [530753225]
+- Updated dependencies [88fdcb137]
+  - @chainlink/ea-bootstrap@2.19.0
+  - @chainlink/ea-test-helpers@1.4.1
+  - @chainlink/token-allocation-adapter@1.6.1
+
+## 2.0.42
+
+### Patch Changes
+
+- Updated dependencies [cf37d46fc]
+- Updated dependencies [3b7c79459]
+- Updated dependencies [cf37d46fc]
+  - @chainlink/token-allocation-adapter@1.6.0
+  - @chainlink/ea-bootstrap@2.18.2
+  - @chainlink/ea-test-helpers@1.4.1
+
+## 2.0.41
+
+### Patch Changes
+
+- Updated dependencies [c14139f55]
+  - @chainlink/ea-bootstrap@2.18.1
+  - @chainlink/token-allocation-adapter@1.5.14
+  - @chainlink/ea-test-helpers@1.4.1
+
+## 2.0.40
+
+### Patch Changes
+
+- @chainlink/token-allocation-adapter@1.5.13
+
+## 2.0.39
+
+### Patch Changes
+
+- Updated dependencies [48730a71c]
+  - @chainlink/ea-bootstrap@2.18.0
+  - @chainlink/token-allocation-adapter@1.5.12
+  - @chainlink/ea-test-helpers@1.4.1
+
+## 2.0.38
+
+### Patch Changes
+
+- @chainlink/token-allocation-adapter@1.5.11
+
 ## 2.0.37
 
 ### Patch Changes

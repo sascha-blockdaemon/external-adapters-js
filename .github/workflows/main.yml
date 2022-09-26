@@ -7,6 +7,10 @@ on:
       - develop
   pull_request: ~
 
+concurrency:
+  group: main-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   packages:
     name: Verify dependency package archives
@@ -74,6 +78,7 @@ jobs:
       - run: yarn install
       - run: yarn setup
       - run: yarn lint
+      - run: yarn setup-tests
       - run: yarn format:check
 
   run-docmentation-check:
