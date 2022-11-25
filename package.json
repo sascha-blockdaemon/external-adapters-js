@@ -36,7 +36,8 @@
     "get-changed-adapters": "ts-node-transpile-only ./packages/scripts/src/get-changed-adapters",
     "validate-codecov": "curl --data-binary @codecov.yml https://codecov.io/validate",
     "get-release-notes": "ts-node-transpile-only ./packages/scripts/src/get-release-notes",
-    "framework-bump": "./packages/scripts/src/framework/version-bump.sh"
+    "framework-bump": "./packages/scripts/src/framework/version-bump.sh",
+    "framework-link": "./packages/scripts/src/framework/link.sh"
   },
   "dependencies": {
     "@babel/core": "7.18.13",

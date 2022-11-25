@@ -1,4 +1,5 @@
 #!/bin/bash
+source ./packages/scripts/src/framework/util.sh
 
 function bump() (
   cd $1
@@ -16,41 +17,15 @@ function bump() (
   fi
 )
 
+
+setNpmAuth
 cd packages
 
-if [[ -z "${NPM_AUTH_TOKEN}" ]]; then
-  echo "The NPM_AUTH_TOKEN variable needs to be set"
-  exit 1
-fi
-
-# This will cause changes to .yarnrc.yml, so we'll need to remove them later
-yarn config set npmAuthToken $NPM_AUTH_TOKEN
-
-if [[ -n "$1" ]]; then
-  # Run bump only for one package
-  if jq -e 'if (.dependencies."@chainlink/external-adapter-framework" != null) then true else false end' "sources/${1}/package.json" > /dev/null ; then
-    echo "Will only bump framework version for package sources/$1"
-    bump "sources/$1"
-  else
-    echo "Package $1 does not exist or use EA v3"
-  fi
-else
-  echo "Bumping versions for all available source packages and scripts"
-  bump scripts/
-
-  for d in sources/* ; do
-    if [[ $d == "sources/README.md" ]] ; then
-      continue
-    fi
-
-    if jq -e 'if (.dependencies."@chainlink/external-adapter-framework" != null) then true else false end' "${d}/package.json" > /dev/null ; then
-      bump "$d"
-    fi
-  done
-fi
+fillPackages $1
+for package in ${packages[@]}; do
+  bump $package
+done
 
 cd ..
-
-# Remove the auth token from .yarnrc to avoid leaking tokens
-git restore .yarnrc.yml
+removeNpmAuth
 
