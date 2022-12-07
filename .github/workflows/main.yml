@@ -62,14 +62,13 @@ jobs:
     runs-on: [self-hosted, sdlc-ghr-prod]
     steps:
       - uses: actions/checkout@v3
+      #        with:
+      #          fetch-depth: 0
       - uses: ./.github/actions/setup
       - name: Test Master List Generation
         run: yarn generate:master-list -v
       - name: Test README Generation
         run: |
-          git fetch
-          git branch -v
-          echo "UPSTREAM_BRANCH: $UPSTREAM_BRANCH"
           source .github/get-changed-adapters-array.sh
           # Quick test, should actually be compared to an input branch
           ADAPTERS=echo "$(getChangedAdapterArray)" | sed -e 's/-adapter//g'
@@ -77,6 +76,8 @@ jobs:
           yarn generate:readme $ADAPTERS -v
         env:
           UPSTREAM_BRANCH: ${{ github.base_ref }}
+    env:
+      METRICS_ENABLED: false
 
   # Read build strategy matrix of adapters, from a json file
   matrix-adapters:
