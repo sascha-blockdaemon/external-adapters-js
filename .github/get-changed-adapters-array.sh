@@ -22,7 +22,6 @@ REGEX="@chainlink/(.*-adapter)"
 function getChangedAdapterArray(){
   changedFiles=()
   for line in $(git diff --name-only "origin/$UPSTREAM_BRANCH"...HEAD); do
-    echo "line: $line"
     if [[ $line =~ ^packages/sources/([a-zA-Z-]*)/.*$ ]]; then
       # TODO sed was giving me a hard time with \sources\|composites. Need to fix later.
       adapterName=$(echo "$line" | sed  -e 's/packages\/sources\/\(.*\)\/.*/\1/g' )
