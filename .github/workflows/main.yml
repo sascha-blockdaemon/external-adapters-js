@@ -72,6 +72,8 @@ jobs:
           ADAPTERS=echo "$(getChangedAdapterArray)" | sed -e 's/-adapter//g'
           echo $ADAPTERS
           yarn generate:readme $ADAPTERS -v
+        env:
+          UPSTREAM_BRANCH: ${{ github.base_ref }}
 
   # Read build strategy matrix of adapters, from a json file
   matrix-adapters:
