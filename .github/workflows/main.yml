@@ -71,7 +71,7 @@ jobs:
         run: |
           source .github/get-changed-adapters-array.sh
           # Quick test, should actually be compared to an input branch
-          ADAPTERS=echo "$(getChangedAdapterArray)" | sed -e 's/-adapter//g'
+          ADAPTERS=$(getChangedAdapterArray | sed -e 's/-adapter//g')
           echo $ADAPTERS
           yarn generate:readme $ADAPTERS -v
         env:
