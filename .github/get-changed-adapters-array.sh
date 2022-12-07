@@ -24,7 +24,6 @@ function getChangedAdapterArray(){
   grep ".changeset" |
   grep -v "README.md" | # Inverse match
   cut -f2 )
-#  changedFiles=$( ls .changeset/*.md )
 
   adapterSet=() # Would ideally want to use an associative array, but MacOS doesn't have bash 4+ installed and we'd have to install zsh in a run to use it
   for fileInThisBranch in $changedFiles; do
@@ -43,4 +42,3 @@ function getChangedAdapterArray(){
 
   echo "${adapterSet[@]}"
 }
-
