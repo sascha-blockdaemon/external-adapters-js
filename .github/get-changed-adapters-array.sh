@@ -21,7 +21,7 @@ REGEX="@chainlink/(.*-adapter)"
 # Any echoed lines will appear in the output array.
 
 function getChangedAdapterArray(){
-  changedFiles=$( git diff --name-status "$UPSTREAM_BRANCH" |
+  changedFiles=$( git diff --name-status HEAD "origin/$UPSTREAM_BRANCH" |
   grep ".changeset" |
   grep -v "README.md" | # Inverse match
   cut -f2 )
