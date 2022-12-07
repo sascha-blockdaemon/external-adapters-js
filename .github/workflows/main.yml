@@ -74,7 +74,6 @@ jobs:
           ADAPTERS=$(getChangedAdapterArray)
           echo $ADAPTERS
           yarn generate:readme $ADAPTERS -v
-          yarn generate:readme $ADAPTERS -v
         env:
           UPSTREAM_BRANCH: ${{ github.base_ref }}
     env:
