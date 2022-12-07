@@ -66,7 +66,12 @@ jobs:
       - name: Test Master List Generation
         run: yarn generate:master-list -v
       - name: Test README Generation
-        run: yarn generate:readme -a -v
+        run: |
+          source .github/get-changed-adapters.sh
+          # Quick test, should actually be compared to an input branch
+          ADAPTERS=echo "$(getChangedAdapterArray)" | sed -e 's/-adapter//g'
+          echo $ADAPTERS
+          yarn generate:readme $ADAPTERS -v
 
   # Read build strategy matrix of adapters, from a json file
   matrix-adapters:

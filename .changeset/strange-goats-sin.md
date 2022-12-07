@@ -6,6 +6,11 @@
 '@chainlink/example-composite-adapter': patch
 '@chainlink/binance-dex-adapter': patch
 '@chainlink/blockstream-adapter': patch
+'@chainlink/blockstream-adapter': patch
+'@chainlink/blockstream-adapter': patch
+'@chainlink/blockstream-adapter': patch
+'@chainlink/blockstream-adapter': patch
+'@chainlink/blockstream-adapter': patch
 ---
 
 Fake changeset
