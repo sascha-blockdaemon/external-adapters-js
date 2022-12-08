@@ -21,8 +21,12 @@ REGEX="@chainlink/(.*-adapter)"
 function getChangedAdapterArray(){
   adapterSet=()
   for line in $(git diff --name-only "origin/$UPSTREAM_BRANCH"...HEAD); do
+    # Returning this keyword will instruct the workflow to run against all adapters instead of a filtered list
+    if [[ $line =~ ^packages/(core|scripts|non-deployable) ||  $line =~ grafana/ ]]; then
+      echo "BUILD_ALL"
+      exit 0
+    fi
     if [[ $line =~ ^packages/(sources|composites)/([a-zA-Z-]*)/.*$ ]]; then
-      # TODO Doing this in two seds is sloppy, was giving me a hard time when trying to do it in one
       adapterName=$(echo "$line" |
       sed  -e 's/packages\/sources\/\(.*\)\/.*/\1/g' |
       sed  -e 's/packages\/composites\/\(.*\)\/.*/\1/g')
@@ -37,4 +41,6 @@ function getChangedAdapterArray(){
   done
 
   echo "${adapterSet[@]}"
+}
+
 }
