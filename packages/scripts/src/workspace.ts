@@ -51,7 +51,6 @@ export function getWorkspacePackages(
       return JSON.parse(v)
     })
     .map(({ location, name }: WorkspacePackage) => {
-      console.log(location, name)
       const pkg: { version: string } = getJsonFile(join(location, 'package.json'))
       return {
         location,

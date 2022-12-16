@@ -112,7 +112,7 @@ export async function main(): Promise<void | string> {
     // Collect new README versions
     const readmeQueue = await Promise.all(
       adapters.map(async (adapter: Adapter) => {
-        const readmeGenerator = new ReadmeGenerator(adapter, options.verbose, adapter.skipTests)
+        const readmeGenerator = new ReadmeGenerator(adapter, options.verbose)
         await readmeGenerator.loadAdapterContent()
         readmeGenerator.buildReadme()
         return readmeGenerator
