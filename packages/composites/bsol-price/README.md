@@ -1,71 +1,53 @@
-# Chainlink bSOL Price Composite Adapter
+# Chainlink bSOL-price Composite Adapter
 
-![2.2.31](https://img.shields.io/github/package-json/v/smartcontractkit/external-adapters-js?filename=packages/composites/bsol-price/package.json)
+This EA pulls the price of bSOL/USD. It works by querying multiple Solana contracts to derive the price of bSOL/stSOL, fetching the price of stSOL/USD from a source data provider and finally multiplying the two to arrive at a price for bSOL/USD. Internally it uses two other EAs namely the `solana-view-function` and `token-allocation` external adapters.
 
-This document was generated automatically. Please see [README Generator](../../scripts#readme-generator) for more info.
+## Configuration
 
-## Environment Variables
+The adapter takes the following environment variables:
 
-| Required? |          Name           |                           Description                            |  Type  | Options | Default |
-| :-------: | :---------------------: | :--------------------------------------------------------------: | :----: | :-----: | :-----: |
-|           |      BSOL_ADDRESS       |                 The address of the bSOL contract                 | string |         |         |
-|           |     SOLIDO_ADDRESS      |                The address of the Solido contract                | string |         |         |
-|           | SOLIDO_CONTRACT_VERSION | The Solido contract version that is deployed to `SOLIDO_ADDRESS` | string |         |         |
-|           |      STSOL_ADDRESS      |                The address of the stSOL contract                 | string |         |         |
+| Required? |           Name            |                           Description                            | Options | Defaults to |
+| :-------: | :-----------------------: | :--------------------------------------------------------------: | :-----: | :---------: |
+|           |     `SOLIDO_ADDRESS`      |                The address of the Solido contract                |         |             |
+|           |      `BSOL_ADDRESS`       |                 The address of the bSOL contract                 |         |             |
+|           |      `STSOL_ADDRESS`      |                The address of the stSOL contract                 |         |             |
+|           | `SOLIDO_CONTRACT_VERSION` | The Solido contract version that is deployed to `SOLIDO_ADDRESS` |         |             |
 
----
+In addition to the environment variables mentioned in the table above, users must set the required environment variables for both the `solana-view-function` and `token-allocation` external adapters.
 
-## Input Parameters
+As of Feb 10th 2022, the addresses and the contract version for the environment variables above should be the following:
 
-Every EA supports base input parameters from [this list](../../core/bootstrap#base-input-parameters)
-
-| Required? |   Name   |     Description     |  Type  |         Options          | Default |
-| :-------: | :------: | :-----------------: | :----: | :----------------------: | :-----: |
-|           | endpoint | The endpoint to use | string | [price](#price-endpoint) | `price` |
-
-## Price Endpoint
-
-`price` is the only supported name for this endpoint.
+SOLIDO_ADDRESS: `EMtjYGwPnXdtqK5SGL8CWGv4wgdBQN79UPoy53x9bBTJ`
+STSOL_ADDRESS: `BSGfVnE6q6KemspkugEERU8x7WbQwSKwvHT1cZZ4ACVN`
+BSOL_ADDRESS: `3FMBoeddUhtqxepzkrxPrMUV3CL4bZM5QmMoLJfEpirz`
+SOLIDO_CONTRACT_VERSION: 0
 
 ### Input Params
 
-| Required? |    Name     | Aliases | Description | Type | Options | Default | Depends On | Not Valid With |
-| :-------: | :---------: | :-----: | :---------: | :--: | :-----: | :-----: | :--------: | :------------: |
-|           |   source    |         |             |      |         |         |            |                |
-|           | allocations |         |             |      |         |         |            |                |
-|           |    quote    |         |             |      |         |         |            |                |
-|           |   method    |         |             |      |         |         |            |                |
+| Required? |   Name   |                                   Description                                    |                 Options                 | Defaults to |
+| :-------: | :------: | :------------------------------------------------------------------------------: | :-------------------------------------: | :---------: |
+|    ✅     | `source` | The data provider the Token Allocation EA should use to pull the stSOL/USD price | Refer to README for Token Allocation EA |             |
 
-### Example
-
-Request:
+### Sample Input
 
 ```json
 {
   "id": "1",
   "data": {
-    "source": "tiingo"
-  },
-  "debug": {
-    "cacheKey": "aafe03ab888f7dd03e1c1542b79233644ad33091"
+    "source": "coingecko"
   }
 }
 ```
 
-Response:
+### Sample Output
 
 ```json
 {
   "jobRunID": "1",
+  "result": 129.10531993874667,
   "statusCode": 200,
-  "result": 104.91215737050713,
   "data": {
-    "result": 104.91215737050713,
-    "statusCode": 200
+    "result": 129.10531993874667
   }
 }
 ```
-
----
-
-MIT License
