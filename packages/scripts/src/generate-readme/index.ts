@@ -4,8 +4,7 @@ import commandLineUsage from 'command-line-usage'
 import { Adapter, Blacklist, BooleanMap } from '../shared/docGenTypes'
 import { getJsonFile } from '../shared/docGenUtils'
 import { ReadmeGenerator } from './generator'
-import { EOL } from 'os'
-import { getWorkspacePackages } from '../workspace'
+import { getWorkspaceAdapters, getWorkspacePackages } from '../workspace'
 
 const pathToBlacklist = 'packages/scripts/src/generate-readme/readmeBlacklist.json'
 
@@ -75,21 +74,15 @@ export async function main(): Promise<void | string> {
       return
     }
 
-    let adapters = options.all
-      ? getWorkspacePackages()
-      : getWorkspacePackages([], process.env['UPSTREAM_BRANCH'])
-
-    // If all isn't passed, but some core or script package has changed, build all
     // Legos will always change because it depends on all adapters, so ignore it when considering if we need to build all
-    if (
-      !options.all &&
-      adapters.find(
+    const shouldBuildAll =
+      options.all ||
+      getWorkspacePackages(process.env['UPSTREAM_BRANCH']).find(
         (p) => (p.type === 'core' && !p.location.includes('legos')) || p.type === 'scripts',
       )
-    ) {
-      console.log('Changes to core or scripts detected, generating READMEs for all adapters')
-      adapters = getWorkspacePackages() //Unfiltered list of all adapters when core or scripts are changed
-    }
+    let adapters = shouldBuildAll
+      ? getWorkspaceAdapters()
+      : getWorkspaceAdapters([], process.env['UPSTREAM_BRANCH'])
 
     // If specific adapters are passed to the command line
     if (options.adapters?.length) {

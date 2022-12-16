@@ -15,8 +15,7 @@ import { getBalanceTable, inputParamHeaders, paramHeaders } from './tableAssets'
 import { EndpointDetails, EnvVars, IOMap, JsonObject, Package, Schema } from '../shared/docGenTypes'
 import fs from 'fs'
 import { Adapter } from '@chainlink/external-adapter-framework/adapter'
-import { SettingsMap } from '@chainlink/external-adapter-framework/config'
-import { WorkspacePackage } from '../workspace'
+import { WorkspaceAdapter } from '../workspace'
 
 const testEnvOverrides = {
   API_VERBOSE: 'true',
@@ -64,7 +63,7 @@ export class ReadmeGenerator {
   license: string
   frameworkVersion: 'v2' | 'v3' = 'v2'
 
-  constructor(adapter: WorkspacePackage, verbose = false) {
+  constructor(adapter: WorkspaceAdapter, verbose = false) {
     this.verbose = verbose
     this.adapterPath = adapter.location
 
@@ -103,7 +102,6 @@ export class ReadmeGenerator {
       this.defaultBaseUrl = configFile.DEFAULT_BASE_URL || configFile.DEFAULT_WS_API_ENDPOINT
 
       if (this.verbose) console.log(`${this.adapterPath}: Importing src/endpoint/index.ts`)
-
       const endpointPath = checkFilePaths([this.adapterPath + 'src/endpoint/index.ts'])
       this.endpointDetails = await require(path.join(process.cwd(), endpointPath))
     } else {

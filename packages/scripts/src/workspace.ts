@@ -5,13 +5,16 @@ import * as s from 'shelljs'
 interface TsConfig {
   references: { path: string }[]
 }
-
 export interface WorkspacePackage {
-  tsconf: TsConfig | undefined
   location: string
   name: string
   descopedName: string
   type: string
+  version: string
+  framework: string
+}
+export interface WorkspaceAdapter extends WorkspacePackage {
+  tsconf: TsConfig | undefined
   environment: Record<string, string> | undefined
   version: string
   framework: string
@@ -29,14 +32,8 @@ export const PUBLIC_ADAPTER_TYPES = [
 ]
 const scope = '@chainlink/'
 
-export type WorkspacePackages = ReturnType<typeof getWorkspacePackages>
-
-export function getWorkspacePackages(
-  additionalTypes: string[] = [],
-  changedFromBranch = '',
-): WorkspacePackage[] {
-  const adapterTypes = PUBLIC_ADAPTER_TYPES.concat(additionalTypes)
-
+export type WorkspacePackages = ReturnType<typeof getWorkspaceAdapters>
+export function getWorkspacePackages(changedFromBranch = ''): WorkspacePackage[] {
   return s
     .exec(
       changedFromBranch
@@ -47,10 +44,9 @@ export function getWorkspacePackages(
     .split('\n')
     .filter(Boolean)
     .map((v) => {
-      console.log(v)
       return JSON.parse(v)
     })
-    .map(({ location, name }: WorkspacePackage) => {
+    .map(({ location, name }: WorkspaceAdapter) => {
       const pkg: { version: string } = getJsonFile(join(location, 'package.json'))
       return {
         location,
@@ -61,6 +57,13 @@ export function getWorkspacePackages(
         framework: '2',
       }
     })
+}
+export function getWorkspaceAdapters(
+  additionalTypes: string[] = [],
+  changedFromBranch = '',
+): WorkspaceAdapter[] {
+  const adapterTypes = PUBLIC_ADAPTER_TYPES.concat(additionalTypes)
+  return getWorkspacePackages(changedFromBranch)
     .filter((v) => adapterTypes.includes(v.type))
     .map((p) => {
       let tsconf: TsConfig | undefined

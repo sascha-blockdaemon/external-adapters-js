@@ -1,4 +1,4 @@
-import { getWorkspacePackages, WorkspacePackage } from '../workspace'
+import { getWorkspaceAdapters, getWorkspacePackages, WorkspaceAdapter } from '../workspace'
 
 interface JobMatrix {
   adapter: {
@@ -22,7 +22,7 @@ type MatrixOutput = {
 
 // Function to correct adapter directory names to their full formal name, used in partial runs
 
-const calculateMatrixValue = (adapter: WorkspacePackage): MatrixOutput => {
+const calculateMatrixValue = (adapter: WorkspaceAdapter): MatrixOutput => {
   let name = ''
   if (adapter.type === 'example') {
     name = `example-${adapter.descopedName}`
@@ -36,22 +36,18 @@ const calculateMatrixValue = (adapter: WorkspacePackage): MatrixOutput => {
 }
 
 export async function getJobMatrix(): Promise<JobMatrix> {
-  let adapters = getWorkspacePackages([], process.env['UPSTREAM_BRANCH'])
+  // Always build all when specifically instructed, or when something in core or scripts has changed
   //legos will always change because it depends on all adapters, so ignore it when considering if we need to build all
   const shouldBuildAll =
     process.argv[2] === '-a' ||
     process.env['BUILD_ALL'] === 'true' ||
-    adapters.find((p) => {
-      console.log(p)
-      return (p.type === 'core' && !p.location.includes('lego')) || p.type === 'scripts'
-    })
+    getWorkspacePackages(process.env['UPSTREAM_BRANCH']).find(
+      (p) => (p.type === 'core' && !p.location.includes('lego')) || p.type === 'scripts',
+    )
 
-  // shouldBuildAll is forcefully set to true if we encounter a core or script change in the diff, so we have to explicitly
-  // check if its true after evaluating the diff.
-  if (shouldBuildAll) {
-    console.log('Full build triggered, returning all adapters')
-    adapters = getWorkspacePackages() //Unfiltered list of all adapters{
-  }
+  const adapters = shouldBuildAll
+    ? getWorkspaceAdapters() //Unfiltered list of all adapters
+    : getWorkspaceAdapters([], process.env['UPSTREAM_BRANCH'])
 
   return {
     adapter: adapters.map(calculateMatrixValue),
