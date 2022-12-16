@@ -41,9 +41,10 @@ export async function getJobMatrix(): Promise<JobMatrix> {
   const shouldBuildAll =
     process.argv[2] === '-a' ||
     process.env['BUILD_ALL'] === 'true' ||
-    adapters.find(
-      (p) => (p.type === 'core' && !p.location.includes('lego')) || p.type === 'scripts',
-    )
+    adapters.find((p) => {
+      console.log(p)
+      return (p.type === 'core' && !p.location.includes('lego')) || p.type === 'scripts'
+    })
 
   // shouldBuildAll is forcefully set to true if we encounter a core or script change in the diff, so we have to explicitly
   // check if its true after evaluating the diff.
