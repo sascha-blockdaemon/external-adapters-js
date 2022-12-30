@@ -161,6 +161,7 @@
     "@chainlink/therundown-adapter": "workspace:*",
     "@chainlink/tiingo-adapter": "workspace:*",
     "@chainlink/tradermade-adapter": "workspace:*",
+    "@chainlink/tradermade-test-adapter": "workspace:*",
     "@chainlink/tradingeconomics-adapter": "workspace:*",
     "@chainlink/trueusd-adapter": "workspace:*",
     "@chainlink/twelvedata-adapter": "workspace:*",

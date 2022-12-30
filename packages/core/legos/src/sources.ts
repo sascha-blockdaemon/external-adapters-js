@@ -130,6 +130,7 @@ import * as terra_view_function from '@chainlink/terra-view-function-adapter'
 import * as therundown from '@chainlink/therundown-adapter'
 import * as tiingo from '@chainlink/tiingo-adapter'
 import * as tradermade from '@chainlink/tradermade-adapter'
+import * as tradermade_test from '@chainlink/tradermade-test-adapter'
 import * as tradingeconomics from '@chainlink/tradingeconomics-adapter'
 import * as trueusd from '@chainlink/trueusd-adapter'
 import * as twelvedata from '@chainlink/twelvedata-adapter'
@@ -277,6 +278,7 @@ export default {
   therundown,
   tiingo,
   tradermade,
+  tradermade_test,
   tradingeconomics,
   trueusd,
   twelvedata,
