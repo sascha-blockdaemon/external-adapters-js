@@ -241,7 +241,6 @@
     {
       "path": "../../sources/galaxy"
     },
-
     {
       "path": "../../sources/gemini"
     },
@@ -409,6 +408,9 @@
     },
     {
       "path": "../../sources/tradingeconomics"
+    },
+    {
+      "path": "../../sources/tradingeconomics-test"
     },
     {
       "path": "../../sources/trueusd"

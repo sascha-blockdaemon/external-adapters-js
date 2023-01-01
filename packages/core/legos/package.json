@@ -162,6 +162,7 @@
     "@chainlink/tiingo-adapter": "workspace:*",
     "@chainlink/tradermade-adapter": "workspace:*",
     "@chainlink/tradingeconomics-adapter": "workspace:*",
+    "@chainlink/tradingeconomics-test-adapter": "workspace:*",
     "@chainlink/trueusd-adapter": "workspace:*",
     "@chainlink/twelvedata-adapter": "workspace:*",
     "@chainlink/unibit-adapter": "workspace:*",

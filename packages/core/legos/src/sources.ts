@@ -131,6 +131,7 @@ import * as therundown from '@chainlink/therundown-adapter'
 import * as tiingo from '@chainlink/tiingo-adapter'
 import * as tradermade from '@chainlink/tradermade-adapter'
 import * as tradingeconomics from '@chainlink/tradingeconomics-adapter'
+import * as tradingeconomics_test from '@chainlink/tradingeconomics-test-adapter'
 import * as trueusd from '@chainlink/trueusd-adapter'
 import * as twelvedata from '@chainlink/twelvedata-adapter'
 import * as unibit from '@chainlink/unibit-adapter'
@@ -278,6 +279,7 @@ export default {
   tiingo,
   tradermade,
   tradingeconomics,
+  tradingeconomics_test,
   trueusd,
   twelvedata,
   unibit,
