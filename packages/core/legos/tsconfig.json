@@ -241,7 +241,6 @@
     {
       "path": "../../sources/galaxy"
     },
-
     {
       "path": "../../sources/gemini"
     },
@@ -354,9 +353,6 @@
       "path": "../../sources/por-address-list"
     },
     {
-      "path": "../../non-deployable/reduce"
-    },
-    {
       "path": "../../sources/renvm-address-set"
     },
     {
@@ -415,6 +411,9 @@
     },
     {
       "path": "../../sources/twelvedata"
+    },
+    {
+      "path": "../../sources/twosigma"
     },
     {
       "path": "../../sources/unibit"

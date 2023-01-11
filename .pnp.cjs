@@ -733,6 +733,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         "reference": "workspace:packages/sources/twelvedata"\
       },\
       {\
+        "name": "@chainlink/twosigma-adapter",\
+        "reference": "workspace:packages/sources/twosigma"\
+      },\
+      {\
         "name": "@chainlink/unibit-adapter",\
         "reference": "workspace:packages/sources/unibit"\
       },\
@@ -977,6 +981,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
       ["@chainlink/tradingeconomics-adapter", ["workspace:packages/sources/tradingeconomics"]],\
       ["@chainlink/trueusd-adapter", ["workspace:packages/sources/trueusd"]],\
       ["@chainlink/twelvedata-adapter", ["workspace:packages/sources/twelvedata"]],\
+      ["@chainlink/twosigma-adapter", ["workspace:packages/sources/twosigma"]],\
       ["@chainlink/unibit-adapter", ["workspace:packages/sources/unibit"]],\
       ["@chainlink/uniswap-v2-adapter", ["workspace:packages/sources/uniswap-v2"]],\
       ["@chainlink/uniswap-v3-adapter", ["workspace:packages/sources/uniswap-v3"]],\
@@ -5379,7 +5384,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@chainlink/poa-adapter", "workspace:packages/sources/poa"],\
             ["@chainlink/polygon-adapter", "workspace:packages/sources/polygon"],\
             ["@chainlink/por-address-list-adapter", "workspace:packages/sources/por-address-list"],\
-            ["@chainlink/reduce-adapter", "workspace:packages/non-deployable/reduce"],\
             ["@chainlink/renvm-address-set-adapter", "workspace:packages/sources/renvm-address-set"],\
             ["@chainlink/satoshitango-adapter", "workspace:packages/sources/satoshitango"],\
             ["@chainlink/snowflake-adapter", "workspace:packages/sources/snowflake"],\
@@ -5400,6 +5404,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@chainlink/tradingeconomics-adapter", "workspace:packages/sources/tradingeconomics"],\
             ["@chainlink/trueusd-adapter", "workspace:packages/sources/trueusd"],\
             ["@chainlink/twelvedata-adapter", "workspace:packages/sources/twelvedata"],\
+            ["@chainlink/twosigma-adapter", "workspace:packages/sources/twosigma"],\
             ["@chainlink/unibit-adapter", "workspace:packages/sources/unibit"],\
             ["@chainlink/uniswap-v2-adapter", "workspace:packages/sources/uniswap-v2"],\
             ["@chainlink/uniswap-v3-adapter", "workspace:packages/sources/uniswap-v3"],\
@@ -7506,6 +7511,24 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./packages/sources/twelvedata/",\
           "packageDependencies": [\
             ["@chainlink/twelvedata-adapter", "workspace:packages/sources/twelvedata"],\
+            ["@chainlink/ea-bootstrap", "workspace:packages/core/bootstrap"],\
+            ["@chainlink/ea-test-helpers", "workspace:packages/core/test-helpers"],\
+            ["@types/jest", "npm:27.5.2"],\
+            ["@types/node", "npm:16.11.51"],\
+            ["@types/supertest", "npm:2.0.12"],\
+            ["nock", "npm:13.2.9"],\
+            ["supertest", "npm:6.2.4"],\
+            ["tslib", "npm:2.4.0"],\
+            ["typescript", "patch:typescript@npm%3A4.7.4#~builtin<compat/typescript>::version=4.7.4&hash=a1c5e5"]\
+          ],\
+          "linkType": "SOFT"\
+        }]\
+      ]],\
+      ["@chainlink/twosigma-adapter", [\
+        ["workspace:packages/sources/twosigma", {\
+          "packageLocation": "./packages/sources/twosigma/",\
+          "packageDependencies": [\
+            ["@chainlink/twosigma-adapter", "workspace:packages/sources/twosigma"],\
             ["@chainlink/ea-bootstrap", "workspace:packages/core/bootstrap"],\
             ["@chainlink/ea-test-helpers", "workspace:packages/core/test-helpers"],\
             ["@types/jest", "npm:27.5.2"],\

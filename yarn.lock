@@ -3009,7 +3009,6 @@ __metadata:
     "@chainlink/poa-adapter": "workspace:*"
     "@chainlink/polygon-adapter": "workspace:*"
     "@chainlink/por-address-list-adapter": "workspace:*"
-    "@chainlink/reduce-adapter": "workspace:*"
     "@chainlink/renvm-address-set-adapter": "workspace:*"
     "@chainlink/satoshitango-adapter": "workspace:*"
     "@chainlink/snowflake-adapter": "workspace:*"
@@ -3030,6 +3029,7 @@ __metadata:
     "@chainlink/tradingeconomics-adapter": "workspace:*"
     "@chainlink/trueusd-adapter": "workspace:*"
     "@chainlink/twelvedata-adapter": "workspace:*"
+    "@chainlink/twosigma-adapter": "workspace:*"
     "@chainlink/unibit-adapter": "workspace:*"
     "@chainlink/uniswap-v2-adapter": "workspace:*"
     "@chainlink/uniswap-v3-adapter": "workspace:*"
@@ -4791,6 +4791,22 @@ __metadata:
 "@chainlink/twelvedata-adapter@workspace:*, @chainlink/twelvedata-adapter@workspace:packages/sources/twelvedata":
   version: 0.0.0-use.local
   resolution: "@chainlink/twelvedata-adapter@workspace:packages/sources/twelvedata"
+  dependencies:
+    "@chainlink/ea-bootstrap": "workspace:*"
+    "@chainlink/ea-test-helpers": "workspace:*"
+    "@types/jest": 27.5.2
+    "@types/node": 16.11.51
+    "@types/supertest": 2.0.12
+    nock: 13.2.9
+    supertest: 6.2.4
+    tslib: ^2.3.1
+    typescript: 4.7.4
+  languageName: unknown
+  linkType: soft
+
+"@chainlink/twosigma-adapter@workspace:*, @chainlink/twosigma-adapter@workspace:packages/sources/twosigma":
+  version: 0.0.0-use.local
+  resolution: "@chainlink/twosigma-adapter@workspace:packages/sources/twosigma"
   dependencies:
     "@chainlink/ea-bootstrap": "workspace:*"
     "@chainlink/ea-test-helpers": "workspace:*"
