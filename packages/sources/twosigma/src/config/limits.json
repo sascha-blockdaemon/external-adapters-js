@@ -1,4 +1,17 @@
 {
   "http": {},
-  "ws": {}
+  "ws": {
+    "starter": {
+      "connections": -1,
+      "subscriptions": -1
+    },
+    "power": {
+      "connections": -1,
+      "subscriptions": -1
+    },
+    "commercial": {
+      "connections": -1,
+      "subscriptions": -1
+    }
+  }
 }

@@ -1,5 +1,5 @@
-import type { TInputParameters as ExampleInputParameters } from './example'
+import type { TInputParameters as EquityInputParameters } from './equity'
 
-export type TInputParameters = ExampleInputParameters
+export type TInputParameters = EquityInputParameters
 
-export * as example from './example'
+export * as equity from './equity'
