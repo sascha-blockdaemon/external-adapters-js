@@ -1,5 +1,12 @@
 # @chainlink/ea
 
+## 1.3.59
+
+### Patch Changes
+
+- Updated dependencies [bba54b419]
+  - @chainlink/kaiko-test-adapter@1.0.0
+
 ## 1.3.58
 
 ### Patch Changes
