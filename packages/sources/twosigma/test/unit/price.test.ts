@@ -172,11 +172,11 @@ describe('parseBaseQuote', () => {
     expect(price.parseBaseQuote(symbol)).toEqual(params)
   })
 
-  it('returns null for invalid symbols', () => {
-    expect(price.parseBaseQuote('')).toEqual(null)
-    expect(price.parseBaseQuote('AAPL')).toEqual(null)
-    expect(price.parseBaseQuote('AAPL//USD')).toEqual(null)
-    expect(price.parseBaseQuote('AAPL/USD/USD')).toEqual(null)
+  it('returns undefined for invalid symbols', () => {
+    expect(price.parseBaseQuote('')).toEqual(undefined)
+    expect(price.parseBaseQuote('AAPL')).toEqual(undefined)
+    expect(price.parseBaseQuote('AAPL//USD')).toEqual(undefined)
+    expect(price.parseBaseQuote('AAPL/USD/USD')).toEqual(undefined)
   })
 })
 

@@ -5,7 +5,7 @@ import {
   priceEndpointInputParameters,
 } from '@chainlink/external-adapter-framework/adapter'
 import { WebSocketTransport } from '@chainlink/external-adapter-framework/transports'
-import { EmptyObject, ProviderResult, makeLogger } from '@chainlink/external-adapter-framework/util'
+import { ProviderResult, makeLogger } from '@chainlink/external-adapter-framework/util'
 
 import { customSettings } from '../config'
 
@@ -15,18 +15,20 @@ export type WebSocketRequest = {
   symbols: string[] // e.g. ["AAPL/USD"]
 }
 
+export type SymbolPriceData = {
+  quote_currency: string // e.g. USD
+  session_status_flag: 'premarket' | 'open' | 'postmarket' | 'closed'
+  asset_status_flag: string // e.g. active
+  confidence_interval: number // e.g. 0.16416514635149188
+  price: number // e.g. 379.64
+}
+
 // Schema of message sent from TwoSigma containing symbol prices
 export type WebSocketMessage = {
   timestamp: number // e.g. 1666705053.713266
   symbol_price_dict: Record<
     string, // e.g. AAPL/USD
-    {
-      quote_currency: string // e.g. USD
-      session_status_flag: 'premarket' | 'open' | 'postmarket' | 'closed'
-      asset_status_flag: string // e.g. active
-      confidence_interval: number // e.g. 0.16416514635149188
-      price: number // e.g. 379.64
-    }
+    SymbolPriceData
   >
 }
 
@@ -38,7 +40,7 @@ type EndpointTypes = {
     Params: PriceEndpointParams
   }
   Response: {
-    Data: EmptyObject
+    Data: SymbolPriceData
     Result: number
   }
   CustomSettings: typeof customSettings
@@ -99,12 +101,14 @@ export class WebSocketHandler {
   subscribeMessage(params: PriceEndpointParams): WebSocketRequest {
     const symbol = buildSymbol(params)
     this.subscribedSymbols.add(symbol)
+    logger.trace(`subscribing to ${symbol}, subscribed set is ${this.subscribedSymbols}`)
     return this.buildRequest()
   }
 
   unsubscribeMessage(params: PriceEndpointParams): WebSocketRequest {
     const symbol = buildSymbol(params)
     this.subscribedSymbols.delete(symbol)
+    logger.trace(`unsubscribing from ${symbol}, subscribed set is ${this.subscribedSymbols}`)
     return this.buildRequest()
   }
 
@@ -119,13 +123,13 @@ export class WebSocketHandler {
 const makeWebSocketTransport = (): WebSocketTransport<WebSocketEndpointTypes> => {
   const handler = new WebSocketHandler()
   return new WebSocketTransport({
-    url: handler.url,
+    url: handler.url.bind(handler),
     handlers: {
-      message: handler.message,
+      message: handler.message.bind(handler),
     },
     builders: {
-      subscribeMessage: handler.subscribeMessage,
-      unsubscribeMessage: handler.unsubscribeMessage,
+      subscribeMessage: handler.subscribeMessage.bind(handler),
+      unsubscribeMessage: handler.unsubscribeMessage.bind(handler),
     },
   })
 }
