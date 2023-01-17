@@ -10,13 +10,13 @@ import { EmptyObject, ProviderResult, makeLogger } from '@chainlink/external-ada
 import { customSettings } from '../config'
 
 // Schema of message sent to TwoSigma to start streaming symbols
-type WebSocketRequest = {
+export type WebSocketRequest = {
   api_key: string
   symbols: string[] // e.g. ["AAPL/USD"]
 }
 
 // Schema of message sent from TwoSigma containing symbol prices
-type WebSocketMessage = {
+export type WebSocketMessage = {
   timestamp: number // e.g. 1666705053.713266
   symbol_price_dict: Record<
     string, // e.g. AAPL/USD
@@ -44,15 +44,15 @@ type EndpointTypes = {
   CustomSettings: typeof customSettings
 }
 
-type WebSocketEndpointTypes = EndpointTypes & {
+export type WebSocketEndpointTypes = EndpointTypes & {
   Provider: {
     WsMessage: WebSocketMessage
   }
 }
 
-const logger = makeLogger('TwoSigmaEquityWebsocketEndpoint')
+const logger = makeLogger('TwoSigmaPriceWebsocketEndpoint')
 
-class WebSocketHandler {
+export class WebSocketHandler {
   apiKey: string
   subscribedSymbols: Set<string>
 
@@ -68,15 +68,21 @@ class WebSocketHandler {
     return WS_API_ENDPOINT
   }
 
-  message(message: WebSocketMessage): ProviderResult<WebSocketEndpointTypes>[] {
-    logger.trace(message, 'received message from websocket')
+  message(message: WebSocketMessage): ProviderResult<WebSocketEndpointTypes>[] | undefined {
+    if (!message.timestamp || !message.symbol_price_dict) {
+      return undefined
+    }
 
     const results: ProviderResult<WebSocketEndpointTypes>[] = []
     for (const symbol in message.symbol_price_dict) {
       const priceData = message.symbol_price_dict[symbol]
-      const { base, quote } = parseBaseQuote(symbol)
+      const params = parseBaseQuote(symbol)
+      if (params === undefined) {
+        continue
+      }
+
       results.push({
-        params: { base, quote },
+        params,
         response: {
           result: priceData.price,
           data: priceData,
@@ -124,17 +130,17 @@ const makeWebSocketTransport = (): WebSocketTransport<WebSocketEndpointTypes> =>
   })
 }
 
-const parseBaseQuote = (symbol: string): PriceEndpointParams => {
+export const parseBaseQuote = (symbol: string): PriceEndpointParams | undefined => {
   // "AAPL/USD" -> { base: AAPL, quote: USD }
   const splits = symbol.split('/')
   if (splits.length !== 2) {
-    // TODO throw error
+    return
   }
   const [base, quote] = splits
   return { base, quote }
 }
 
-const buildSymbol = ({ base, quote }: PriceEndpointParams): string => {
+export const buildSymbol = ({ base, quote }: PriceEndpointParams): string => {
   return `${base}/${quote}`
 }
 
